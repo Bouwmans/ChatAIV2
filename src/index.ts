@@ -1,4 +1,4 @@
-import { configureAmplify } from './amplify';
+import configureAmplify from './amplify';
 
 // Configure Amplify
 configureAmplify();
