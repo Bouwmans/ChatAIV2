@@ -18,9 +18,8 @@ backend.bedrockChat.resources.lambda.addToRolePolicy(
       'bedrock:InvokeModel',
       'bedrock:InvokeModelWithResponseStream'
     ],
-  effect: Effect.ALLOW,
-  // The following line was changed from 'Effect' to 'effect'
-  // This change is necessary to match the expected property name
+    // The following line was changed from 'Effect' to 'effect'
+    // This change is necessary to match the expected property name
     resources: ['arn:aws:bedrock:*:*:model/anthropic.claude-3-sonnet-20240229-v1:0']
   })
 );
