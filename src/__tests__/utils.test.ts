@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { generateConversationTitle, truncateText, formatDate } from '../src/utils';
+import { generateConversationTitle, truncateText, formatDate } from '../utils';
 
 describe('Utils', () => {
   describe('generateConversationTitle', () => {

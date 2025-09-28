@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Send, Bot, User as UserIcon } from 'lucide-react';
-import { MessageList } from './MessageList';
+import { Bot, User as UserIcon } from 'lucide-react';
+
 import { MessageInput } from './MessageInput';
 import { MessageService, ChatService } from '../services';
 import type { Conversation, Message } from '../types';

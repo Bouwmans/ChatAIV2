@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Plus, 
   MessageSquare, 
-  MoreVertical, 
+
   Edit2, 
   Trash2, 
   LogOut,
