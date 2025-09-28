@@ -18,7 +18,7 @@ const schema = a.schema({
     .model({
       id: a.id().required(),
       conversationId: a.id().required(),
-      role: a.enum(['user', 'assistant']).required(),
+      role: a.enum(['user', 'assistant']),
       content: a.string().required(),
       timestamp: a.datetime().required(),
       conversation: a.belongsTo('Conversation', 'conversationId'),
