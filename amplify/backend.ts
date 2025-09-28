@@ -1,7 +1,7 @@
 import { defineBackend } from '@aws-amplify/backend';
-import { auth } from './auth';
-import { data } from './data';
-import { bedrockChat } from './bedrock-chat';
+import { auth } from './auth/resource';
+import { data } from './data/resource';
+import { bedrockChat } from './function/resource';
 
 export const backend = defineBackend({
   auth,
