@@ -14,7 +14,7 @@
     "amplify:deploy": "npx @aws-amplify/backend-cli deploy"
   },
   "dependencies": {
-    "@aws-amplify/backend": "^1.16.1",
+    "@aws-amplify/backend": "^1.15.0",
     "@aws-amplify/ui-react": "^6.0.0",
     "aws-amplify": "^6.0.0",
     "clsx": "^2.0.0",

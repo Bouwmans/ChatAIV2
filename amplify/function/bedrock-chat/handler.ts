@@ -1,7 +1,7 @@
 import { BedrockRuntimeClient, InvokeModelCommand } from '@aws-sdk/client-bedrock-runtime';
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 
-const bedrockClient = new BedrockRuntimeClient({ region: 'us-east-1' });
+const bedrockClient = new BedrockRuntimeClient({ region: 'eu-west-1' });
 
 interface ChatRequest {
   message: string;
