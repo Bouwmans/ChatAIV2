@@ -24,7 +24,8 @@ dist-ssr
 *.sw?
 
 # AWS Amplify
-.amplify
+.amplify/*
+.amplify/artifacts
 amplify_outputs.json
 .amplifyrc
 amplify/backend/awscloudformation/

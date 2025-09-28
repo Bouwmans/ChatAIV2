@@ -33,7 +33,15 @@ function App() {
     >
       {({ signOut, user }) => (
         <Routes>
-          <Route path="/" element={<ChatApp user={user} signOut={signOut} />} />
+          <Route
+            path="/"
+            element={
+              <ChatApp
+                user={{ ...user!, email: user!.email || 'default@example.com' }}
+                signOut={signOut || (() => {})}
+              />
+            }
+          />
         </Routes>
       )}
     </Authenticator>
