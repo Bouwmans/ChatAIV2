@@ -1,6 +1,27 @@
 import { generateClient } from 'aws-amplify/data';
-import type { Schema } from '../../amplify/data';
+import type { Schema } from '../../amplify/data/resource';
 import type { Conversation, Message, ChatRequest, ChatResponse } from '../types';
+
+const isDefined = <T>(value: T | null | undefined): value is T =>
+  value !== null && value !== undefined;
+
+const mapConversationFromModel = (
+  item: Schema['Conversation']['type']
+): Conversation => ({
+  id: item.id,
+  title: item.title ?? 'Untitled Conversation',
+  userId: item.userId ?? 'unknown-user',
+  createdAt: item.createdAt ?? new Date().toISOString(),
+  updatedAt: item.updatedAt ?? new Date().toISOString(),
+});
+
+const mapMessageFromModel = (item: Schema['Message']['type']): Message => ({
+  id: item.id,
+  conversationId: item.conversationId,
+  role: (item.role ?? 'assistant') as Message['role'],
+  content: item.content ?? '',
+  timestamp: item.timestamp ?? new Date().toISOString(),
+});
 
 const client = generateClient<Schema>();
 
@@ -9,9 +30,11 @@ export class ConversationService {
     try {
       const { data } = await client.models.Conversation.list({
         limit: 50,
-        sortDirection: 'DESC',
       });
-      return data as Conversation[];
+      const conversations = Array.isArray(data)
+        ? data.filter(isDefined).map(mapConversationFromModel)
+        : [];
+      return conversations;
     } catch (error) {
       console.error('Error fetching conversations:', error);
       throw error;
@@ -20,11 +43,18 @@ export class ConversationService {
 
   static async createConversation(title: string): Promise<Conversation> {
     try {
+      const now = new Date().toISOString();
       const { data } = await client.models.Conversation.create({
         title,
         userId: 'current-user', // This will be replaced by the actual user ID from auth
+        createdAt: now,
+        updatedAt: now,
       });
-      return data as Conversation;
+      if (!data) {
+        throw new Error('Conversation creation returned no data');
+      }
+
+      return mapConversationFromModel(data);
     } catch (error) {
       console.error('Error creating conversation:', error);
       throw error;
@@ -36,8 +66,13 @@ export class ConversationService {
       const { data } = await client.models.Conversation.update({
         id,
         title,
+        updatedAt: new Date().toISOString(),
       });
-      return data as Conversation;
+      if (!data) {
+        throw new Error('Conversation update returned no data');
+      }
+
+      return mapConversationFromModel(data);
     } catch (error) {
       console.error('Error updating conversation:', error);
       throw error;
@@ -59,9 +94,11 @@ export class MessageService {
     try {
       const { data } = await client.models.Message.list({
         filter: { conversationId: { eq: conversationId } },
-        sortDirection: 'ASC',
       });
-      return data as Message[];
+      const messages = Array.isArray(data)
+        ? data.filter(isDefined).map(mapMessageFromModel)
+        : [];
+      return messages;
     } catch (error) {
       console.error('Error fetching messages:', error);
       throw error;
@@ -80,7 +117,11 @@ export class MessageService {
         content,
         timestamp: new Date().toISOString(),
       });
-      return data as Message;
+      if (!data) {
+        throw new Error('Message creation returned no data');
+      }
+
+      return mapMessageFromModel(data);
     } catch (error) {
       console.error('Error creating message:', error);
       throw error;
