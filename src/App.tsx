@@ -1,7 +1,15 @@
 import { Routes, Route } from 'react-router-dom';
 import { Authenticator } from '@aws-amplify/ui-react';
+import type { AuthUser } from 'aws-amplify/auth';
 import { ChatApp } from './components/ChatApp';
+import type { User } from './types';
 import '@aws-amplify/ui-react/styles.css';
+
+const mapAuthUserToUser = (authUser: AuthUser): User => ({
+  username: authUser.username,
+  userId: authUser.userId,
+  email: authUser.signInDetails?.loginId ?? authUser.username,
+});
 
 function App() {
   return (
@@ -31,19 +39,23 @@ function App() {
         },
       }}
     >
-      {({ signOut, user }) => (
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <ChatApp
-                user={{ ...user!, email: user!.email || 'default@example.com' }}
-                signOut={signOut || (() => {})}
-              />
-            }
-          />
-        </Routes>
-      )}
+      {({ signOut, user }) => {
+        const appUser = user ? mapAuthUserToUser(user) : undefined;
+        const handleSignOut = signOut ?? (() => {});
+
+        if (!appUser) {
+          return <></>;
+        }
+
+        return (
+          <Routes>
+            <Route
+              path="/"
+              element={<ChatApp user={appUser} signOut={handleSignOut} />}
+            />
+          </Routes>
+        );
+      }}
     </Authenticator>
   );
 }

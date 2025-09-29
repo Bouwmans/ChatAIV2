@@ -89,7 +89,13 @@ export const handler = async (
     });
 
     const response = await bedrockClient.send(command);
-    const responseBody = JSON.parse(new TextDecoder().decode(response.body));
+    const rawBody =
+      typeof response.body === 'string'
+        ? response.body
+        : response.body
+        ? new TextDecoder().decode(response.body)
+        : '{}';
+    const responseBody = JSON.parse(rawBody);
 
     const chatResponse: ChatResponse = {
       response: responseBody.content[0].text,

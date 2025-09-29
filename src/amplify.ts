@@ -1,4 +1,5 @@
 import { Amplify } from 'aws-amplify';
+
 // Note: amplify_outputs.json will be generated when you run `npx ampx sandbox`
 // For now, we'll use a placeholder configuration
 const outputs = {
@@ -17,6 +18,8 @@ const outputs = {
   },
 };
 
-Amplify.configure(outputs);
+export const configureAmplify = () => {
+  Amplify.configure(outputs);
+};
 
-export default Amplify;
+export { Amplify };
