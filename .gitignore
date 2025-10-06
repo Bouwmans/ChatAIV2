@@ -1,12 +1,5 @@
+# amplify
 node_modules
-.dist
-amplify/#current-cloud-backend
-amplify/.config/local-env-info.json
-amplify/.config/local-aws-info.json
-amplify/backend/.config/
-amplify/.secret
-npm-debug.log*
-dist
-.DS_Store
-.vscode
-coverage
+.amplify
+amplify_outputs*
+amplifyconfiguration*
