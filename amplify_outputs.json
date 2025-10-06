@@ -1,0 +1,21 @@
+{
+  "aws_project_region": "YOUR_AWS_REGION",
+  "auth": {
+    "user_pool_id": "YOUR_USER_POOL_ID",
+    "user_pool_client_id": "YOUR_USER_POOL_CLIENT_ID",
+    "user_pool_client_secret": "",
+    "identity_pool_id": ""
+  },
+  "api": {
+    "chatApi": {
+      "endpoint": "https://your-api-id.execute-api.YOUR_AWS_REGION.amazonaws.com",
+      "region": "YOUR_AWS_REGION"
+    }
+  },
+  "data": {
+    "default": {
+      "modelIntrospectionEndpoint": "https://your-graphql-endpoint.appsync-api.YOUR_AWS_REGION.amazonaws.com/graphql",
+      "region": "YOUR_AWS_REGION"
+    }
+  }
+}
