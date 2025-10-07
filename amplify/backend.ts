@@ -12,15 +12,15 @@ import { chatBedrock } from './functions/chatbedrock/resource';
 const backend = defineBackend({
   auth,
   data,
-  chatBedrock,
+  // chatBedrock,
   // Removed: Hosting config not supported for Vite SPA in defineBackend.
 });
 
-// Grant Lambda Bedrock invoke perms (docs-exact: backend.<function>.resources.lambda).
-const lambda = backend.chatBedrock.resources.lambda;
-const statement = new iam.PolicyStatement({
-  effect: iam.Effect.ALLOW,
-  actions: ['bedrock:InvokeModel'],
-  resources: [`arn:aws:bedrock:${lambda.stack.region}::foundation-model/${process.env.BEDROCK_MODEL_ID}`],  // Dynamic region from stack.
-});
-lambda.addToRolePolicy(statement);
+// // Grant Lambda Bedrock invoke perms (docs-exact: backend.<function>.resources.lambda).
+// const lambda = backend.chatBedrock.resources.lambda;
+// const statement = new iam.PolicyStatement({
+//   effect: iam.Effect.ALLOW,
+//   actions: ['bedrock:InvokeModel'],
+//   resources: [`arn:aws:bedrock:${lambda.stack.region}::foundation-model/${process.env.BEDROCK_MODEL_ID}`],  // Dynamic region from stack.
+// });
+// lambda.addToRolePolicy(statement);
