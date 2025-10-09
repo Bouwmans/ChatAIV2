@@ -14,6 +14,8 @@ const backend = defineBackend({
   data,
   // chatBedrock,
   // Removed: Hosting config not supported for Vite SPA in defineBackend.
+}, {
+  region: 'eu-west-1'
 });
 
 // // Grant Lambda Bedrock invoke perms (docs-exact: backend.<function>.resources.lambda).
