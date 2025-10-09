@@ -1,7 +1,7 @@
 {
   "name": "chataiv2",
   "version": "1.0.0",
-  "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -12,10 +12,13 @@
   "devDependencies": {
     "@aws-amplify/backend": "^1.16.1",
     "@aws-amplify/backend-cli": "^1.8.0",
+    "@aws-sdk/client-bedrock-runtime": "^3.901.0",
+    "@types/aws-lambda": "^8.10.119",
     "@types/node": "^24.7.0",
     "aws-cdk-lib": "^2.204.0",
     "constructs": "^10.4.2",
     "esbuild": "^0.25.10",
+    "neverthrow": "^6.1.0",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3"
   },
